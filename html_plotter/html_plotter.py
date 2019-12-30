@@ -46,9 +46,7 @@ def show(plt, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_
             with open(caller_filename) as f:
                 code_html = highlight(f.read(), PythonLexer(), HtmlFormatter(linespans='line'))
                 code_css = HtmlFormatter(linespans='line').get_style_defs('.highlight')
-            files_folder = os.path.join( folder, 'files', str(datetime.datetime.now()).replace(' ','-').replace('','') )
-            os.makedirs( files_folder )
-            calling_code_html = os.path.join( files_folder, 'index.html' )
+            calling_code_html = os.path.join( folder, str(datetime.datetime.now()).replace(' ','-')+'.html' )
             with open( calling_code_html, 'w' ) as html_file:
                 tmp = HTML_HULL.replace( '<!--PLACEHOLDER-->',
     """<p class='p_image'><img src='"""+full_img_filename+"""'/><br/>
@@ -71,7 +69,7 @@ def show(plt, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_
     if verbose:
         print('plot viewable in=', full_html_filename)
 
-#def caller():
-#    from matplotlib import pyplot as plt
-#    plt.plot(range(10),range(10))
-#    show( plt )
+def caller():
+    from matplotlib import pyplot as plt
+    plt.plot(range(10),range(10))
+    show( plt )
