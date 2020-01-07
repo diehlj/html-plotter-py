@@ -3,9 +3,25 @@ import os
 
 import inspect
 
+from matplotlib import pyplot as PLT
+
 from pygments import highlight
 from pygments.lexers import PythonLexer
 from pygments.formatters import HtmlFormatter
+
+
+
+######## <CONVENIENCE METHODS> ###########
+def plot(*args, **kwargs):
+    ret = PLT.plot( *args, **kwargs )
+    show( PLT )
+    return ret
+
+def magnitude_spectrum(*args, **kwargs):
+    ret = PLT.magnitude_spectrum( *args, **kwargs )
+    show( PLT )
+    return ret
+######## </CONVENIENCE METHODS> ###########
 
 TMP_FOLDER = '/tmp'
 
@@ -23,7 +39,7 @@ HTML_HULL = """
 <!--PLACEHOLDER-->
 </body>"""
 
-def show(plt, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_filename='index.html', verbose=True, track_caller=True):
+def show(plt=PLT, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_filename='index.html', verbose=False, track_caller=True):
     """
     Plot to a png file and append <img> in a html file.
     """
