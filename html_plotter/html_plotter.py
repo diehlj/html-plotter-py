@@ -39,7 +39,7 @@ HTML_HULL = """
 <!--PLACEHOLDER-->
 </body>"""
 
-def show(plt=PLT, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_filename='index.html', verbose=False, track_caller=True):
+def show(plt=PLT, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_filename='index.html', verbose=False, track_caller=True,sage=False):
     """
     Plot to a png file and append <img> in a html file.
     """
@@ -50,8 +50,13 @@ def show(plt=PLT, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), h
         with open( folder + '/' + html_filename, 'w' ) as html_file:
             html_file.write(HTML_HULL)
     full_img_filename = os.path.join( folder, str(datetime.datetime.now()).replace(' ','-').replace('','') + '.png' )
-    plt.savefig( full_img_filename )
-    plt.gcf().clear()
+    if sage:
+        import sage.misc.persist as p
+        p.save(plt,full_img_filename,axes=False,aspect_ratio=True) 
+        #os.system('open -a Preview /tmp/dom.png')
+    else:
+        plt.savefig( full_img_filename )
+        plt.gcf().clear()
 
     if track_caller:
         code = inspect.currentframe().f_back.f_code
