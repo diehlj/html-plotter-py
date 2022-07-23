@@ -16,7 +16,7 @@ Installation
 
 Install with::
 
-    pip install git+git://github.com/diehlj/html-plotter-py
+    pip install git+https://github.com/diehlj/html-plotter-py
 
 Copyright © 2019 Joscha Diehl
 
