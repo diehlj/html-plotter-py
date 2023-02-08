@@ -25,6 +25,9 @@ def magnitude_spectrum(*args, **kwargs):
 
 TMP_FOLDER = '/tmp'
 
+def set_tmp_folder(v):
+    global TMP_FOLDER
+    TMP_FOLDER = v
 
 HTML_HULL = """
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -39,10 +42,13 @@ HTML_HULL = """
 <!--PLACEHOLDER-->
 </body>"""
 
-def show(plt=PLT, comment=None, folder=os.path.join(TMP_FOLDER, 'matplotlib'), html_filename='index.html', verbose=False, track_caller=True,sage=False):
+def show(plt=PLT, comment=None, folder=None, html_filename='index.html', verbose=False, track_caller=True,sage=False):
     """
     Plot to a png file and append <img> in a html file.
     """
+    if folder is None:
+        folder = os.path.join(TMP_FOLDER, 'matplotlib')
+
     if not os.path.isdir( folder ):
         os.mkdir( folder )
     full_html_filename = os.path.join( folder, html_filename )
